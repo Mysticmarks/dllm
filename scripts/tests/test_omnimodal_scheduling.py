@@ -103,3 +103,17 @@ def test_omnimodal_config_validates_curriculum_stage_boundaries():
         assert "max_step" in str(exc)
     else:
         raise AssertionError("expected ValueError for negative curriculum max_step")
+
+
+def test_omnimodal_config_validates_positive_gif_threshold():
+    config = OmnimodalConfig(
+        enabled=True,
+        ingestion=IngestionPolicyConfig(source_folder="/tmp", gif_video_frame_threshold=0),
+    )
+
+    try:
+        config.validate()
+    except ValueError as exc:
+        assert "gif_video_frame_threshold" in str(exc)
+    else:
+        raise AssertionError("expected ValueError for non-positive gif threshold")

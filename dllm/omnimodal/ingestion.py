@@ -27,6 +27,7 @@ class IngestionConfig:
     max_retries: int = 1
     gif_policy: str = "adaptive"
     pdf_policy: str = "auto"
+    gif_video_frame_threshold: int = 2
 
 
 def _expand_pdf_record(record: OmnimodalManifestRecord, pdf_policy: str) -> list[OmnimodalManifestRecord]:
@@ -107,6 +108,7 @@ def scan_folder_records(
                 detection = detect_modality(
                     file_path.as_posix(),
                     gif_policy=cfg.gif_policy,
+                    gif_video_frame_threshold=cfg.gif_video_frame_threshold,
                 )
                 relative_id = file_path.relative_to(root).as_posix().replace("/", "__")
                 base_record = OmnimodalManifestRecord(

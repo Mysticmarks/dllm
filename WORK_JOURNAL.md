@@ -109,3 +109,17 @@
   - Marked Phase 8 entries complete in planning docs.
 - **Follow-up**:
   - Next logical step is replacing one stub adapter backend (image/audio/pdf) with concrete integration.
+
+
+### 2026-03-03T02:55:00Z — GIF threshold policy finalization and TODO sync
+- **Scope**: finalized adaptive GIF threshold configuration and closed related planning TODOs.
+- **Commands**:
+  - `python - <<'PY' ...` edits for `/workspace/dllm/dllm/omnimodal/config.py`, `/workspace/dllm/dllm/omnimodal/detection.py`, `/workspace/dllm/dllm/omnimodal/ingestion.py`
+  - `python - <<'PY' ...` edits for `/workspace/dllm/TASKS.md`, `/workspace/dllm/TODOs.md`, `/workspace/dllm/docs/omnimodal.md`
+  - `python - <<'PY' ...` edits for `/workspace/dllm/scripts/tests/test_omnimodal_detection.py`, `/workspace/dllm/scripts/tests/test_omnimodal_scheduling.py`
+- **Result summary**:
+  - Added configurable `gif_video_frame_threshold` with validation (`>=1`) and ingestion wiring into modality detection.
+  - Closed rollback checklist items and GIF policy blocker in `/workspace/dllm/TODOs.md`.
+  - Added tests for adaptive GIF threshold behavior and config validation.
+- **Follow-up**:
+  - Optional: tune default threshold from production telemetry when real GIF datasets are available.

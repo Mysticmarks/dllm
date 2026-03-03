@@ -265,6 +265,21 @@
   - `pytest /workspace/dllm/scripts/tests -v`
 - **Rollback plan**: revert latest phase-specific commits selectively.
 
+
+#### P8-T02: Finalize GIF adaptive frame-threshold policy
+- **Status**: done
+- **Inputs**: open GIF policy blocker from `/workspace/dllm/TODOs.md`.
+- **Outputs**: configurable `gif_video_frame_threshold` with config validation and ingestion wiring.
+- **Depends on**: P1-T01.
+- **Can run in parallel with**: none.
+- **Breakage risk**: low.
+- **Acceptance criteria**:
+  - Adaptive GIF routing threshold is explicit and deterministic.
+  - Non-positive threshold values fail fast during config validation.
+- **Validation**:
+  - `PYTHONPATH=/workspace/dllm pytest /workspace/dllm/scripts/tests/test_omnimodal_detection.py /workspace/dllm/scripts/tests/test_omnimodal_scheduling.py -v`
+- **Rollback plan**: revert threshold field and return to fixed threshold semantics.
+
 ---
 
 ## Risk register

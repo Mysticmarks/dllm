@@ -57,10 +57,13 @@
 - Bundle D: Docs/examples independent of trainer internals.
 
 ## Rollback checklist
-- [ ] Keep feature flags default-off for new modality paths.
-- [ ] Isolate omnimodal imports to avoid import-time failures.
-- [ ] Separate trainer hooks from base trainer classes.
+- [x] Keep feature flags default-off for new modality paths.
+- [x] Isolate omnimodal imports to avoid import-time failures.
+- [x] Separate trainer hooks from base trainer classes.
 
 ## Open blocker tracker
 - [ ] External discrete tokenizer backends are not bundled yet (image/video/audio).
-- [ ] Need policy finalization for GIF frame-threshold defaults.
+- [x] Need policy finalization for GIF frame-threshold defaults.
+
+## Latest updates
+- Added `gif_video_frame_threshold` config default (`2`) and validation (`>=1`) to close GIF adaptive-policy blocker.
