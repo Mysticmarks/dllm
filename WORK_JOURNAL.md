@@ -97,3 +97,15 @@
   - Added unit coverage for scheduling behavior and config validation.
 - **Follow-up**:
   - Optionally wire scheduling policy objects into a pipeline entry script behind default-off flags.
+
+### 2026-03-03T02:35:00Z — Phase 8 hardening closure (smoke + compatibility)
+- **Scope**: added end-to-end omnimodal smoke tests and closed Phase 8 checklist/docs status.
+- **Commands**:
+  - `PYTHONPATH=/workspace/dllm pytest /workspace/dllm/scripts/tests/test_omnimodal_phase8_smoke.py -v`
+  - `PYTHONPATH=/workspace/dllm pytest /workspace/dllm/scripts/tests/test_omnimodal_*.py /workspace/dllm/scripts/tests/test_data_utils.py -v`
+- **Result summary**:
+  - Added synthetic mixed-modality smoke test covering scan -> adapter encode -> collate flow.
+  - Added manifest-load backward-compat test for unknown-modality filtering.
+  - Marked Phase 8 entries complete in planning docs.
+- **Follow-up**:
+  - Next logical step is replacing one stub adapter backend (image/audio/pdf) with concrete integration.
