@@ -29,4 +29,8 @@ Use `/workspace/dllm/dllm/omnimodal/config.py` and call `OmnimodalConfig.validat
 
 ### Known gaps
 - Discrete backends for image/video/audio/pdf are not bundled yet.
-- PDF adaptive decomposition currently represented as policy/config contract and should be wired with backend extractors in follow-up.
+- PDF adaptive decomposition policy now expands records deterministically into text/image routes; backend extractors are still pending.
+
+### Training/inference hook updates
+- Trainer hooks now expose objective-level and modality-level metric mapping helpers for logging integrations.
+- Sampler conditioning now validates payload shape and types before inference calls.

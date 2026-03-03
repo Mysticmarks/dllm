@@ -26,6 +26,46 @@ class IngestionConfig:
     skip_corrupt: bool = True
     max_retries: int = 1
     gif_policy: str = "adaptive"
+    pdf_policy: str = "auto"
+
+
+def _expand_pdf_record(record: OmnimodalManifestRecord, pdf_policy: str) -> list[OmnimodalManifestRecord]:
+    if record.modality != Modality.PDF:
+        return [record]
+
+    normalized_policy = pdf_policy.lower()
+    if normalized_policy not in {"auto", "text_only", "image_only", "hybrid"}:
+        raise ValueError(f"invalid pdf_policy: {pdf_policy}")
+
+    base_metadata = dict(record.metadata or {})
+    base_metadata["pdf_policy"] = normalized_policy
+
+    def _clone_as(modality: Modality, suffix: str, route: str) -> OmnimodalManifestRecord:
+        return OmnimodalManifestRecord(
+            sample_id=f"{record.sample_id}::{suffix}",
+            uri=record.uri,
+            modality=modality,
+            split=record.split,
+            labels=record.labels,
+            metadata={**base_metadata, "pdf_route": route},
+            timestamp=record.timestamp,
+            sequence_index=record.sequence_index,
+            group_id=record.group_id,
+            provenance=record.provenance,
+            confidence=record.confidence,
+            preprocessing=record.preprocessing,
+        )
+
+    if normalized_policy == "text_only":
+        return [_clone_as(Modality.TEXT, "pdf_text", "text")]
+    if normalized_policy == "image_only":
+        return [_clone_as(Modality.IMAGE, "pdf_image", "image")]
+
+    # auto and hybrid currently use deterministic two-view decomposition.
+    return [
+        _clone_as(Modality.TEXT, "pdf_text", "text"),
+        _clone_as(Modality.IMAGE, "pdf_image", "image"),
+    ]
 
 
 def _iter_paths(root: Path, recursive: bool) -> list[Path]:
@@ -69,15 +109,14 @@ def scan_folder_records(
                     gif_policy=cfg.gif_policy,
                 )
                 relative_id = file_path.relative_to(root).as_posix().replace("/", "__")
-                records.append(
-                    OmnimodalManifestRecord(
-                        sample_id=f"{split}:{relative_id}",
-                        uri=file_path.as_posix(),
-                        modality=detection.modality,
-                        split=split,
-                        metadata={"detection_trace": detection.trace.__dict__},
-                    )
+                base_record = OmnimodalManifestRecord(
+                    sample_id=f"{split}:{relative_id}",
+                    uri=file_path.as_posix(),
+                    modality=detection.modality,
+                    split=split,
+                    metadata={"detection_trace": detection.trace.__dict__},
                 )
+                records.extend(_expand_pdf_record(base_record, cfg.pdf_policy))
                 break
             except Exception as exc:
                 retries += 1

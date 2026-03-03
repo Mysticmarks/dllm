@@ -29,3 +29,18 @@ def test_scan_folder_records_and_quarantine(tmp_path):
     assert len(lines) == 1
     payload = json.loads(lines[0])
     assert payload["uri"].endswith("bad.mp3")
+
+
+def test_scan_folder_records_expands_pdf_using_policy(tmp_path):
+    data_dir = Path(tmp_path) / "data"
+    data_dir.mkdir()
+    (data_dir / "doc.pdf").write_bytes(b"%PDF-1.4")
+
+    records = scan_folder_records(
+        root_dir=data_dir.as_posix(),
+        config=IngestionConfig(pdf_policy="hybrid"),
+    )
+
+    assert len(records) == 2
+    assert {record.modality.value for record in records} == {"text", "image"}
+    assert all(record.metadata and record.metadata["pdf_policy"] == "hybrid" for record in records)
