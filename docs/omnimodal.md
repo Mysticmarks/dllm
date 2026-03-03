@@ -21,6 +21,7 @@ This document describes the additive omnimodal foundation introduced under `/wor
 - Adapter registry: `/workspace/dllm/dllm/omnimodal/adapters.py`
 - Strategy registry: `/workspace/dllm/dllm/omnimodal/strategies.py`
 - Collator: `/workspace/dllm/dllm/omnimodal/collators.py`
+- Scheduling hooks (weighted sampling and curriculum filters): `/workspace/dllm/dllm/omnimodal/scheduling.py`
 - Trainer hooks: `/workspace/dllm/dllm/omnimodal/trainer_hooks.py`
 - Sampler: `/workspace/dllm/dllm/omnimodal/sampler.py`
 

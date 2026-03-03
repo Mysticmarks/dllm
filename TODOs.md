@@ -28,13 +28,13 @@
 ### Phase 4
 - [x] Implement unified token package schema.
 - [x] Add mixed-batch collator with max-token-budget mode.
-- [ ] Add weighted modality/source sampler and curriculum schedule hooks.
+- [x] Add weighted modality/source sampler and curriculum schedule hooks.
 - [x] Add objective strategy registry and deterministic routing trace.
 
 ### Phase 5
 - [x] Implement trainer hook mixin for modality-aware preprocess/loss.
 - [x] Add per-modality and per-objective metric logging.
-- [ ] Keep existing trainers untouched unless hooks explicitly enabled.
+- [x] Keep existing trainers untouched unless hooks explicitly enabled.
 
 ### Phase 6
 - [x] Implement minimal omnimodal sampler entry point.
