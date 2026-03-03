@@ -23,7 +23,7 @@
 - [x] Add manifest schema and JSONL parser/validator.
 - [x] Support labeled/unlabeled/weak labels in one schema.
 - [x] Add grouped sample linkage and alignment metadata.
-- [ ] Add PDF adaptive routing policy (`auto`, `text_only`, `image_only`, `hybrid`).
+- [x] Add PDF adaptive routing policy (`auto`, `text_only`, `image_only`, `hybrid`).
 
 ### Phase 4
 - [x] Implement unified token package schema.
@@ -33,12 +33,12 @@
 
 ### Phase 5
 - [x] Implement trainer hook mixin for modality-aware preprocess/loss.
-- [ ] Add per-modality and per-objective metric logging.
+- [x] Add per-modality and per-objective metric logging.
 - [ ] Keep existing trainers untouched unless hooks explicitly enabled.
 
 ### Phase 6
 - [x] Implement minimal omnimodal sampler entry point.
-- [ ] Add conditioning validation and unsupported decode failure messages.
+- [x] Add conditioning validation and unsupported decode failure messages.
 
 ### Phase 7
 - [x] Add `/workspace/dllm/docs/omnimodal.md`.
