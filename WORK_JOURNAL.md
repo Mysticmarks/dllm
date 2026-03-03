@@ -83,3 +83,17 @@
   - Captured focus areas for hardening phase completion and backend integration sequencing.
 - **Follow-up**:
   - Use `/workspace/dllm/CONTEXT_REFRESH.md` as the default orientation reference before implementing additional omnimodal feature work.
+
+### 2026-03-03T02:05:00Z — Weighted scheduling and curriculum hook pass
+- **Scope**: implemented weighted modality/source sampling + curriculum filtering scaffolding and validation updates.
+- **Commands**:
+  - `cat > /workspace/dllm/dllm/omnimodal/scheduling.py <<'PY' ...`
+  - `python - <<'PY'` edits for `/workspace/dllm/dllm/omnimodal/config.py`, `/workspace/dllm/dllm/omnimodal/__init__.py`, `/workspace/dllm/docs/omnimodal.md`, `/workspace/dllm/TODOs.md`
+  - `cat > /workspace/dllm/scripts/tests/test_omnimodal_scheduling.py <<'PY' ...`
+  - `PYTHONPATH=/workspace/dllm pytest /workspace/dllm/scripts/tests/test_omnimodal_scheduling.py /workspace/dllm/scripts/tests/test_omnimodal_collator.py /workspace/dllm/scripts/tests/test_omnimodal_ingestion.py /workspace/dllm/scripts/tests/test_omnimodal_trainer_hooks.py -v`
+- **Result summary**:
+  - Added deterministic weighted sampler behavior and stage-based curriculum filtering with feature flags.
+  - Added config validation for non-negative weights and curriculum stage boundaries.
+  - Added unit coverage for scheduling behavior and config validation.
+- **Follow-up**:
+  - Optionally wire scheduling policy objects into a pipeline entry script behind default-off flags.
