@@ -1,0 +1,4 @@
+{"sample_id":"txt-1","uri":"/dataset/train/a.txt","modality":"text","split":"train","labels":{"target":"summary"},"group_id":"g1","metadata":{"lang":"en"}}
+{"sample_id":"img-1","uri":"/dataset/train/a.png","modality":"image","split":"train","group_id":"g1"}
+{"sample_id":"aud-1","uri":"/dataset/train/a.wav","modality":"audio","split":"train","metadata":{"duration_s":5.0}}
+{"sample_id":"mid-1","uri":"/dataset/train/a.mid","modality":"midi","split":"train"}
