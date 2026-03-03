@@ -19,6 +19,7 @@ class IngestionPolicyConfig:
     max_retries: int = 1
     quarantine_manifest_path: str | None = None
     gif_policy: str = "adaptive"
+    gif_video_frame_threshold: int = 2
     pdf_policy: str = "auto"
 
 
@@ -79,6 +80,8 @@ class OmnimodalConfig:
             raise ValueError("omnimodal ingestion requires exactly one of source_folder/source_manifest")
         if self.ingestion.gif_policy not in {"adaptive", "image", "video"}:
             raise ValueError(f"invalid gif_policy: {self.ingestion.gif_policy}")
+        if self.ingestion.gif_video_frame_threshold < 1:
+            raise ValueError("ingestion gif_video_frame_threshold must be >= 1")
         if self.ingestion.pdf_policy not in {"auto", "text_only", "image_only", "hybrid"}:
             raise ValueError(f"invalid pdf_policy: {self.ingestion.pdf_policy}")
         if any(weight < 0 for weight in self.weighted_sampling.modality_weights.values()):

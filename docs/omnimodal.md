@@ -28,6 +28,9 @@ This document describes the additive omnimodal foundation introduced under `/wor
 ### Config notes
 Use `/workspace/dllm/dllm/omnimodal/config.py` and call `OmnimodalConfig.validate()` early to fail fast.
 
+- `ingestion.gif_policy`: `adaptive`, `image`, or `video`.
+- `ingestion.gif_video_frame_threshold`: integer threshold used when `gif_policy=adaptive`; GIFs with frame count `>=` threshold route to video, otherwise image.
+
 ### Known gaps
 - Discrete backends for image/video/audio/pdf are not bundled yet.
 - PDF adaptive decomposition policy now expands records deterministically into text/image routes; backend extractors are still pending.

@@ -20,3 +20,13 @@ def test_detect_gif_policy_adaptive_to_video():
     result = detect_modality("/tmp/sample.gif", gif_policy="adaptive", gif_frame_count=3)
     assert result.modality == Modality.VIDEO
     assert "adaptive->video" in " ".join(result.trace.policy_notes)
+
+
+def test_detect_gif_policy_adaptive_to_image_below_threshold():
+    result = detect_modality(
+        "/tmp/sample.gif",
+        gif_policy="adaptive",
+        gif_frame_count=2,
+        gif_video_frame_threshold=3,
+    )
+    assert result.modality == Modality.IMAGE

@@ -57,6 +57,7 @@ def detect_modality(
     path: str,
     gif_policy: str = "adaptive",
     gif_frame_count: int | None = None,
+    gif_video_frame_threshold: int = 2,
 ) -> DetectionResult:
     file_path = Path(path)
     ext_guess = _EXTENSION_MAP.get(file_path.suffix.lower(), Modality.UNKNOWN)
@@ -73,12 +74,12 @@ def detect_modality(
             modality = Modality.VIDEO
             notes.append("gif_policy=video")
         else:
-            if gif_frame_count is not None and gif_frame_count > 1:
+            if gif_frame_count is not None and gif_frame_count >= gif_video_frame_threshold:
                 modality = Modality.VIDEO
-                notes.append("gif_policy=adaptive->video")
+                notes.append(f"gif_policy=adaptive->video(threshold={gif_video_frame_threshold})")
             else:
                 modality = Modality.IMAGE
-                notes.append("gif_policy=adaptive->image")
+                notes.append(f"gif_policy=adaptive->image(threshold={gif_video_frame_threshold})")
 
     trace = ModalityDetectionTrace(
         guessed_by_extension=ext_guess.value if ext_guess != Modality.UNKNOWN else None,
