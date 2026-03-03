@@ -35,3 +35,7 @@ Use `/workspace/dllm/dllm/omnimodal/config.py` and call `OmnimodalConfig.validat
 ### Training/inference hook updates
 - Trainer hooks now expose objective-level and modality-level metric mapping helpers for logging integrations.
 - Sampler conditioning now validates payload shape and types before inference calls.
+
+### Hardening sweep coverage
+- End-to-end synthetic mixed-modality smoke validation lives in `/workspace/dllm/scripts/tests/test_omnimodal_phase8_smoke.py`.
+- Text backward-compat filtering behavior from manifest loading is explicitly tested in the same smoke suite.

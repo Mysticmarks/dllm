@@ -46,8 +46,8 @@
 - [x] Add tests for detection/manifest/adapters/collator/strategy/trainer hooks.
 
 ### Phase 8
-- [ ] Run broad test suite and text backward-compat smoke.
-- [ ] Run mixed ingestion smoke with temporary synthetic dataset.
+- [x] Run broad test suite and text backward-compat smoke.
+- [x] Run mixed ingestion smoke with temporary synthetic dataset.
 - [x] Finalize `IMPLEMENTATION_SUMMARY.md`.
 
 ## Parallel-safe bundles

@@ -35,7 +35,7 @@
 | Phase 5 | Trainer integration hooks | done |
 | Phase 6 | Sampler/inference hooks (MVP) | done |
 | Phase 7 | Examples + docs + tests | done |
-| Phase 8 | Hardening / edge cases / validation sweep | in_progress |
+| Phase 8 | Hardening / edge cases / validation sweep | done |
 
 ---
 
@@ -252,7 +252,7 @@
 ### Phase 8 — Hardening and final validation
 
 #### P8-T01: End-to-end smoke and compatibility sweep
-- **Status**: in_progress
+- **Status**: done
 - **Inputs**: full branch.
 - **Outputs**: validated status notes and known gaps.
 - **Depends on**: all prior tasks.
